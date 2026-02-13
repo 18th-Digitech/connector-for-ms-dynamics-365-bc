@@ -83,7 +83,8 @@ aio app deploy
 
 ### Customer Sync Issues
 
-Developer Console → Events → Commerce Customer Sync → Debug Tracing
+[**Developer Console**](https://developer.adobe.com/developer-console/) → Events → Commerce Customer Sync → Debug Tracing
+
 
 ### Product / Source Sync Issues
 
@@ -97,5 +98,5 @@ aio rt:activation:log <activationId>
 ## 📩 Support
 
 For advanced features or enterprise capabilities, contact:
-18th Digitech Team: **support@18dapps.com**
+18th Digitech Pvt Ltd Team: **support@18dapps.com**
 

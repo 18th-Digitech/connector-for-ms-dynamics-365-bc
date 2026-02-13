@@ -36,7 +36,7 @@ This document provides step-by-step instructions to install, configure, and depl
 
 ## 3. Install the App from Adobe Exchange
 
-1. Acquire the Microsoft Dynamics 365 Business Central  App from Adobe Exchange
+1. Acquire the **Connector for MS Dynamics 365 BC**  App from Adobe Exchange
 2. Obtain organization admin approval
 3. Select environment (Development / Staging / Production)
 4. Create workspace using the guide:
@@ -49,16 +49,18 @@ This document provides step-by-step instructions to install, configure, and depl
 Create an App Builder Project in Developer Console along with required services.
 
 
-1. Log in to the and select the desired organization from the dropdown menu in the top-right cornerAdobe Developer Console
+1. Log in to the and select the desired organization from the dropdown menu in the top-right corner Adobe Developer Console
 2. Click Create new project from template
 3. Select App Builder . The Set up templated project pages displays
 4. Specify a project title and app name. Mark the Include Runtime with each workspace checkbox.
 5. Create workspaces (Stage/Production)
 6. Add following APIs to the workspace:
+  ```bash
    a. I/O Events
    b. I/O Management API
    c. Adobe I/O Events for Adobe Commerce
-   d. Adobe Commerce as a Cloud Service (For SaaS installatio)
+   d. Adobe Commerce as a Cloud Service (For SaaS installation)
+  ```
 
 ## 5. Environment Configuration
 
@@ -94,28 +96,28 @@ BC_COMPANY=
 BC_OAUTH_CLIENT=
 BC_OAUTH_SECRET=
 BC_OAUTH_SCOPES=
-BC_OAUTH_GRANT_TYPE
+BC_OAUTH_GRANT_TYPE=
 ```
 
 ---
 
 ### 5.4 Custom Environment Variable 
 
-# Inventory sources
+#### Inventory sources
 AVAILABLE_SOURCES_DIR=sources_data/
 
-# All SKUs
+#### All SKUs
 AVAILABLE_SKU_DIR=catalog_data/
 
-# Attribute Options
+#### Attribute Options
 AVAILABLE_ATTRIBUTE_OPTIONS=attributeOptions/
 
-# AttributeCode
+#### Attribute Code
 PRODUCT_ATTRIBUTE_CODE=uom$UOM$option
 
-# Product Constant Values
-TAX_CLASS_ID=2
-WEBSITE_IDS=1
+#### Product Constant Values
+- TAX_CLASS_ID=2
+- WEBSITE_IDS=1
 
 ### 5.5 Adobe App Builder (IMS OAuth – SaaS)
 
@@ -143,7 +145,7 @@ IO_WORKSPACE_ID=
 
 ---
 
-### 5.7 Add workspace.Json file
+### 5.7 Add workspace.json file
 
 The workspace.json file must be placed in  scripts/onboarding/config/
 https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/#download-the-workspace-configuration-file
@@ -153,7 +155,7 @@ https://developer.adobe.com/commerce/extensibility/starter-kit/integration/creat
 
 ### Base URL Differences
 
-- PaaS: https://<env>.magentosite.cloud/rest/
+- PaaS: https://<environment-name>.magentosite.cloud/rest/
 - SaaS: https://na1-sandbox.api.commerce.adobe.com/<tenant-id>/
 
 ### Authentication Precedence
@@ -169,7 +171,7 @@ https://developer.adobe.com/commerce/extensibility/starter-kit/integration/creat
 - System → Extensions → Integrations → Add New Integration
 - Grant API access and activate integration
 
-### Shipsy
+### Microsoft Dynamics 365 Business Central
 - Log in to Microsoft Dynamics 365 Business Central
 - Request API credentials from Business Central support if required
 
@@ -189,7 +191,7 @@ aio console workspace select
 aio app use --merge
 ```
 
-## 9 Onboarding & Deploy
+## 9. Onboarding & Deploy
 
 The onboarding script must be executed manually before running aio app deploy. If this step is skipped, the post-deploy script may fail.
 
@@ -222,11 +224,11 @@ Event subscriptions are automatically created during deployment.
 
 ## 11. Testing
 
--Run Full Product Sync → Entire catalog updates in Adobe Commerce
--Execute Delta Sync → Recently modified products are updated
--Perform Specific Sync → Selected products sync successfully
--Run Source Sync → Inventory sources update correctly
--Update customer in My Account → Customer data syncs to Business Central (if exists)
+- Run Full Product Sync → Entire catalog updates in Adobe Commerce
+- Execute Delta Sync → Recently modified products are updated
+- Perform Specific Sync → Selected products sync successfully
+- Run Source Sync → Inventory sources update correctly
+- Update customer in My Account → Customer data syncs to Business Central (if exists)
 
 ---
 
@@ -241,11 +243,9 @@ https://developer.adobe.com/commerce/extensibility/app-development/best-practice
 
 ## 13. Troubleshooting
 
--Customer sync issues: If customer data is not syncing, go to Developer Console → Events → Commerce Customer Sync → Debug Tracing to review event
- logs and identify errors.
--Product or Inventory Source sync errors: Navigate to your project directory and run aio rt:activation:list to view recent activations. Identify
- the relevant activation ID for the failed sync, then run aio rt:activation:log <activationId> to retrieve detailed error logs.
--General sync failures: Verify API credentials, environment configurations, and ensure scheduled cron jobs are running correctly.
+- Customer sync issues: If customer data is not syncing, go to Developer Console → Events → Commerce Customer Sync → Debug Tracing to review event logs and identify errors.
+- Product or Inventory Source sync errors: Navigate to your project directory and run aio rt:activation:list to view recent activations. Identify the relevant activation ID for the failed sync, then run aio rt:activation:log <activationId> to retrieve detailed error logs.
+- General sync failures: Verify API credentials, environment configurations, and ensure scheduled cron jobs are running correctly.
 
 ---
 
