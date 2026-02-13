@@ -50,6 +50,16 @@ npm run onboard
 
 If this step is skipped, the post-deploy script may fail.
 
+### Configure Cron Job Schedule
+ 
+  You have the flexibility to set the cron job schedule time in the `app.config.yaml` file to suit your needs perfectly. If you'd like to ensure that the instructions for the cron job schedule in the help guide are up-to-date, you can easily make those updates at the specified path
+
+ ```bash
+ web-src/src/components/UserGuideTab.js
+ ```
+
+
+
 After onboarding, deploy the application using:
 
 ``` bash
