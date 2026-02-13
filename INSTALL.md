@@ -99,7 +99,25 @@ BC_OAUTH_GRANT_TYPE
 
 ---
 
-### 5.4 Adobe App Builder (IMS OAuth – SaaS)
+### 5.4 Custom Environment Variable 
+
+# Inventory sources
+AVAILABLE_SOURCES_DIR=sources_data/
+
+# All SKUs
+AVAILABLE_SKU_DIR=catalog_data/
+
+# Attribute Options
+AVAILABLE_ATTRIBUTE_OPTIONS=attributeOptions/
+
+# AttributeCode
+PRODUCT_ATTRIBUTE_CODE=uom$UOM$option
+
+# Product Constant Values
+TAX_CLASS_ID=2
+WEBSITE_IDS=1
+
+### 5.5 Adobe App Builder (IMS OAuth – SaaS)
 
 ```env
 OAUTH_CLIENT_ID=
@@ -113,7 +131,7 @@ OAUTH_HOST=https://ims-na1.adobelogin.com
 
 ---
 
-### 5.5 Workspace Identifiers
+### 5.6 Workspace Identifiers
 
 Copy from Developer Console → Project → Workspace:
 
@@ -125,7 +143,7 @@ IO_WORKSPACE_ID=
 
 ---
 
-### 5.6 Add workspace.Json file
+### 5.7 Add workspace.Json file
 
 The workspace.json file must be placed in  scripts/onboarding/config/
 https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/#download-the-workspace-configuration-file
