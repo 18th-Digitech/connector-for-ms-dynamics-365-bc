@@ -36,7 +36,7 @@ for enterprise-level operations.
 
 Please follow the detailed installation instructions in:
 
-👉 [**INSTALL.md**](#/blob/master/INSTALL.md)
+👉 [**INSTALL.md**](https://github.com/18th-Digitech/connector-for-ms-dynamics-365-bc/blob/master/INSTALL.md)
 
 ------------------------------------------------------------------------
 
