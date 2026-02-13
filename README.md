@@ -36,8 +36,7 @@ for enterprise-level operations.
 
 Please follow the detailed installation instructions in:
 
-👉 **INSTALL.md**
-[**INSTALL.md**](#blob/master/INSTALL.md)
+👉 [**INSTALL.md**](#/blob/master/INSTALL.md)
 
 ------------------------------------------------------------------------
 
