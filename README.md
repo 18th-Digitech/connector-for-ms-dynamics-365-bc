@@ -21,12 +21,12 @@ for enterprise-level operations.
 
 ### 🔹 Inventory Source Management
 
--   On-demand Full Source Sync
--   Specific Source Sync
--   Daily Delta Source Sync
+-   On-demand Full Inventory Sources Sync
+-   Specific Inventory Sources Sync
+-   Daily Delta Inventory Source Sync
 -   Multi-source inventory consistency
 
-### 🔹 Customer Synchronization
+### 🔹 Customer Update
 
 -   Event-driven sync when customer updates data in **My Account**
 -   Sync occurs only if the customer exists in Business Central
@@ -37,6 +37,7 @@ for enterprise-level operations.
 Please follow the detailed installation instructions in:
 
 👉 **INSTALL.md**
+[**INSTALL.md**](#blob/master/INSTALL.md)
 
 ------------------------------------------------------------------------
 
@@ -65,7 +66,7 @@ aio app deploy
 -   Perform Specific Sync → Selected products sync
 -   Run Source Sync → Inventory sources update
 -   Update customer in My Account → Customer sync triggers
--   Validate Order, Invoice, and Shipment sync
+
 
 ------------------------------------------------------------------------
 
