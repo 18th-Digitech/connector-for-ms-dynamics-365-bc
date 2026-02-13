@@ -1,123 +1,91 @@
-# Adobe Commerce – Shipsy Rider App
+# Connector for Microsoft Dynamics 365 Business Central
 
-## Overview
+The **Connector for Microsoft Dynamics 365 Business Central** integrates Adobe Commerce with Microsoft Dynamics 365 Business Central using Adobe
+App Builder.
 
-The **Adobe Commerce – Shipsy Rider App** integrates Adobe Commerce with **Shipsy** to automate the complete **order-to-delivery workflow** with real-time synchronization.
+This integration enables structured and controlled synchronization of products, inventory sources, customers updates between both systems.
 
-The app sends new orders from Adobe Commerce to Shipsy for rider assignment, keeps order updates and cancellations in sync, and receives delivery status updates via webhooks to ensure both platforms remain aligned.
+The connector provides Full Sync, Delta Sync, and Specific Sync options via the Admin UI, along with scheduled automation and detailed logging
+for enterprise-level operations.
 
----
+------------------------------------------------------------------------
 
-## Key Features
+## 🚀 Features
 
-- Automatic order sync from Adobe Commerce to Shipsy  
-- Real-time rider assignment and delivery status tracking  
-- Support for order updates and cancellations  
-- Webhook-based delivery status synchronization  
-- No manual intervention required  
+### 🔹 Product Synchronization
 
----
+-   Full Product Sync (runs once daily)
+-   Delta Sync (runs every 15 minutes)
+-   Specific Product Sync (on demand)
+-   Bulk API & Batch Processing for high performance
 
-## Quick Start
+### 🔹 Inventory Source Management
 
-### Prerequisites
+-   On-demand Full Source Sync
+-   Specific Source Sync
+-   Daily Delta Source Sync
+-   Multi-source inventory consistency
 
-- Node.js v18+  
-- Adobe I/O CLI v10.3.4 (authenticated)  
-- Adobe Commerce API credentials  
-- Shipsy API Base URL, Customer Code and Shipsy Api key
+### 🔹 Customer Synchronization
 
----
+-   Event-driven sync when customer updates data in **My Account**
+-   Sync occurs only if the customer exists in Business Central
 
-### Installation
 
-1. Install the **Adobe Commerce – Shipsy Rider App** from Adobe Exchange  
-2. Obtain organization admin approval  
-3. Select environment (Development / Staging / Production)  
-4. Adobe creates an App Builder workspace automatically  
+## 📦 Installation
 
----
+Please follow the detailed installation instructions in:
 
-### Configuration
+👉 **INSTALL.md**
 
-Configure the following environment variables in the Adobe App Builder workspace:
+------------------------------------------------------------------------
 
-```
-1- Download the app ZIP package from Adobe Exchange
-2- Connect the downloaded code to your Adobe App Builder workspace
-3- Add the workspace details to the environment configuration
-4- Update the .env file with workspace-specific values
-5- Add the workspace JSON configuration to the .aio file
+## ⚠️ Important -- Onboarding Required Before Deployment
 
-Redeploy the app after configuration.
+Before deploying the app, you must manually run:
 
-For more information Please follow the URL: https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/
----
-
-## How It Works
-
-- **Order Creation** → Shipsy SoftData Upload API  
-- **Order Update** → Shipsy SoftData Update API  
-- **Order Cancellation** → Shipsy Cancel API  
-- **Delivery Tracking** → Shipsy Webhooks  
-
----
-
-## Sequence Flow
-
- 
-Customer
-   |
-Adobe Commerce
-   |
-Rider App (App Builder)
-   |
-Shipsy APIs
-   |
-Shipsy Rider
-   |
-Webhook Updates
-   |
-Adobe Commerce
- 
-
----
-
-## Custom Order Attributes (Optional)
-
-```
-{
-  "extension_attributes": {
-    "delivery_time_slot_start": "2025-07-22 09:00:00",
-    "delivery_time_slot_end": "2025-07-22 11:00:00",
-    "notes": "Leave at the reception desk",
-    "rider_type": "Express"
-  }
-}
+``` bash
+npm run onboard
 ```
 
----
+If this step is skipped, the post-deploy script may fail.
 
-## Debugging & Monitoring
+After onboarding, deploy the application using:
 
-Use **Debug Trace** in Adobe Developer Console:
-
-```
-Events → Commerce Order Sync → Debug Tracing
+``` bash
+aio app deploy
 ```
 
----
+------------------------------------------------------------------------
 
-## Troubleshooting
+## 🧪 Testing Checklist
 
-- Orders not syncing: verify API credentials  
-- No delivery updates: check webhook URL and secret  
-- Missing attributes: validate Magento order API  
+-   Run Full Product Sync → Entire catalog updates
+-   Execute Delta Sync → Recently modified products update
+-   Perform Specific Sync → Selected products sync
+-   Run Source Sync → Inventory sources update
+-   Update customer in My Account → Customer sync triggers
+-   Validate Order, Invoice, and Shipment sync
 
----
+------------------------------------------------------------------------
 
-## Support
+## 🛠 Debugging & Monitoring
 
-- Adobe Commerce App Support  
-- Shipsy Integration Support  
-- 18th Digitech Team: support@18dapps.com
+### Customer Sync Issues
+
+Developer Console → Events → Commerce Customer Sync → Debug Tracing
+
+### Product / Source Sync Issues
+
+``` bash
+aio rt:activation:list
+aio rt:activation:log <activationId>
+```
+
+------------------------------------------------------------------------
+
+## 📩 Support
+
+For advanced features or enterprise capabilities, contact:
+18th Digitech Team: **support@18dapps.com**
+

@@ -1,7 +1,7 @@
 # Installation Guide
-Adobe Commerce – Shipsy Rider App
+Connector for MS Dynamics 365 BC
 
-This document provides step-by-step instructions to install, configure, and deploy the Adobe Commerce – Shipsy Rider App using Adobe App Builder.
+This document provides step-by-step instructions to install, configure, and deploy the Connector for MS Dynamics 365 BC App using Adobe App Builder.
 
 ---
 
@@ -17,23 +17,26 @@ This document provides step-by-step instructions to install, configure, and depl
 - Adobe Commerce Admin
 
 ### Credentials Required
-- Shipsy API Base URL
-- Shipsy API Auth Token / API Key
+- Business Central Environment 
+- Business Central Host
+- Business Central Tenant
+- Business Central Company
+- Business Central Oauth Client
+- Business Central Oauth Secret
+- Business Central Oauth Grant Type
 
----
 
-## 2. Installation Overview
-
-1. Download the app ZIP from Adobe Exchange
-2. Connect the code to your Adobe App Builder workspace
-3. Configure required services and environment variables
-4. Deploy the app and subscribe to Commerce events
+## 2.Quick Start Installation
+1. Download the Connector for MS Dynamics 365 BC App code from Adobe Exchange
+2. Create an App Builder Project in Developer Console
+3. Update your Environment Variables
+4. Initialize and Deploy App Builder Actions to the workspace and subscribe to Commerce events
 
 ---
 
 ## 3. Install the App from Adobe Exchange
 
-1. Acquire the Rider App from Adobe Exchange
+1. Acquire the Microsoft Dynamics 365 Business Central  App from Adobe Exchange
 2. Obtain organization admin approval
 3. Select environment (Development / Staging / Production)
 4. Create workspace using the guide:
@@ -43,13 +46,19 @@ This document provides step-by-step instructions to install, configure, and depl
 
 ## 4. Configure Required Services
 
-Add the following services to your App Builder workspace:
-- I/O Events
-- I/O Management API
-- Adobe I/O Events for Adobe Commerce
-- Configure the Commerce Admin Integration with Adobe ID
+Create an App Builder Project in Developer Console along with required services.
 
----
+
+1. Log in to the and select the desired organization from the dropdown menu in the top-right cornerAdobe Developer Console
+2. Click Create new project from template
+3. Select App Builder . The Set up templated project pages displays
+4. Specify a project title and app name. Mark the Include Runtime with each workspace checkbox.
+5. Create workspaces (Stage/Production)
+6. Add following APIs to the workspace:
+   a. I/O Events
+   b. I/O Management API
+   c. Adobe I/O Events for Adobe Commerce
+   d. Adobe Commerce as a Cloud Service (For SaaS installatio)
 
 ## 5. Environment Configuration
 
@@ -75,12 +84,17 @@ COMMERCE_ACCESS_TOKEN_SECRET=
 
 ---
 
-### 5.3 Shipsy Configuration
+### 5.3 Business Central Configuration
 
 ```env
-SHIPSY_API_BASE_URL=https://<shipsy-api-url>
-SHIPSY_API_AUTH_TOKEN=
-CUSTOMER_CODE=
+BC_ENVIRONMENT=
+BC_HOST=
+BC_TENANT=
+BC_COMPANY=
+BC_OAUTH_CLIENT=
+BC_OAUTH_SECRET=
+BC_OAUTH_SCOPES=
+BC_OAUTH_GRANT_TYPE
 ```
 
 ---
@@ -111,16 +125,11 @@ IO_WORKSPACE_ID=
 
 ---
 
-### 5.6 Webhook & Logging
+### 5.6 Add workspace.Json file
 
-```env
-SHIPSY_WEBHOOK_URL=
-SHIPSY_WEBHOOK_SECRET=
-LOG_STORAGE_PATH=
-EVENT_PREFIX=test_app
-```
+The workspace.json file must be placed in  scripts/onboarding/config/
+https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/#download-the-workspace-configuration-file
 
----
 
 ## 6. Authentication: PaaS vs SaaS
 
@@ -143,15 +152,15 @@ EVENT_PREFIX=test_app
 - Grant API access and activate integration
 
 ### Shipsy
-- Log in to Shipsy
-- Request API credentials from Shipsy support if required
+- Log in to Microsoft Dynamics 365 Business Central
+- Request API credentials from Business Central support if required
 
 ### Adobe App Builder
 - Developer Console → Project → Workspace → OAuth Server-to-Server
 
 ---
 
-## 8. Initialize & Deploy
+## 8. Initialize 
 
 ```bash
 npm install
@@ -160,15 +169,28 @@ aio console org select
 aio console project select
 aio console workspace select
 aio app use --merge
-aio app deploy
 ```
 
----
+## 9 Onboarding & Deploy
 
-## 9. Event Subscription
+The onboarding script must be executed manually before running aio app deploy. If this step is skipped, the post-deploy script may fail.
+
+```bash
+npm run onboard
+
+```
+### 9.1 Deploy
+
+```bash
+aio app deploy
+
+```
+
+
+## 10. Event Subscription
 
 ### Event Used
-- sales_order_save_commit_after
+- observer.customer_save_commit_after
 
 ### Subscribe Manually (if needed)
 
@@ -180,33 +202,19 @@ Event subscriptions are automatically created during deployment.
 
 ---
 
-## 10. Custom Order Attributes (Optional)
-
-```json
-{
-  "extension_attributes": {
-    "delivery_time_slot_start": "2025-07-22 09:00:00",
-    "delivery_time_slot_end": "2025-07-22 11:00:00",
-    "notes": "Leave at the reception desk",
-    "rider_type": "Express"
-  }
-}
-```
-
----
-
 ## 11. Testing
 
-- Place an order → Sent to Shipsy
-- Update order → Shipsy updated
-- Cancel order → Shipsy cancelled
-- Verify webhook delivery updates
+-Run Full Product Sync → Entire catalog updates in Adobe Commerce
+-Execute Delta Sync → Recently modified products are updated
+-Perform Specific Sync → Selected products sync successfully
+-Run Source Sync → Inventory sources update correctly
+-Update customer in My Account → Customer data syncs to Business Central (if exists)
 
 ---
 
 ## 12. Debugging & Monitoring
 
-Developer Console → Events → Commerce Order Sync → Debug Tracing
+Developer Console → Events → Commerce Customer Sync → Debug Tracing
 
 More details:
 https://developer.adobe.com/commerce/extensibility/app-development/best-practices/logging-troubleshooting/#event-logs
@@ -215,9 +223,11 @@ https://developer.adobe.com/commerce/extensibility/app-development/best-practice
 
 ## 13. Troubleshooting
 
-- Orders not syncing: Verify Commerce and Shipsy credentials
-- No delivery updates: Check webhook URL and secret
-- Missing attributes: Validate extension attributes
+-Customer sync issues: If customer data is not syncing, go to Developer Console → Events → Commerce Customer Sync → Debug Tracing to review event
+ logs and identify errors.
+-Product or Inventory Source sync errors: Navigate to your project directory and run aio rt:activation:list to view recent activations. Identify
+ the relevant activation ID for the failed sync, then run aio rt:activation:log <activationId> to retrieve detailed error logs.
+-General sync failures: Verify API credentials, environment configurations, and ensure scheduled cron jobs are running correctly.
 
 ---
 
@@ -227,4 +237,4 @@ https://developer.adobe.com/commerce/extensibility/app-development/best-practice
 - https://developer.adobe.com/commerce/extensibility/starter-kit/integration/
 - https://developer.adobe.com/events/docs/support/tracing
 - https://experienceleague.adobe.com/en/docs/commerce-admin/start/admin/ims/adobe-ims-config#
-We have secured our webhook using the require-whisk-auth key. This key can be found in webhook → actions.config.yaml. When you register our webhook (which is implemented as a web action in App Builder), you must include this key in the request headers. Please pass the key using the following header to access the webhook: X-Require-Whisk-Auth
+
