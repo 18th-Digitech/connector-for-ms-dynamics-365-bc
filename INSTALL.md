@@ -105,6 +105,7 @@ BC_OAUTH_GRANT_TYPE=
 
 #### Inventory sources
 AVAILABLE_SOURCES_DIR=sources_data/
+ALLOWED_COUNTRY_CODE=AU
 
 #### All SKUs
 AVAILABLE_SKU_DIR=catalog_data/
