@@ -104,17 +104,17 @@ BC_OAUTH_GRANT_TYPE=
 ### 5.4 Custom Environment Variable 
 
 #### Inventory sources
-AVAILABLE_SOURCES_DIR=sources_data/
-ALLOWED_COUNTRY_CODE=AU
+- AVAILABLE_SOURCES_DIR=sources_data/
+- ALLOWED_COUNTRY_CODE=AU
 
 #### All SKUs
-AVAILABLE_SKU_DIR=catalog_data/
+- AVAILABLE_SKU_DIR=catalog_data/
 
 #### Attribute Options
-AVAILABLE_ATTRIBUTE_OPTIONS=attributeOptions/
+- AVAILABLE_ATTRIBUTE_OPTIONS=attributeOptions/
 
 #### Attribute Code
-PRODUCT_ATTRIBUTE_CODE=uom$UOM$option
+- PRODUCT_ATTRIBUTE_CODE=uom$UOM$option
 
 #### Product Constant Values
 - TAX_CLASS_ID=2
