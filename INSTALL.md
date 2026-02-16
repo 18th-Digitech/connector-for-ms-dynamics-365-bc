@@ -161,6 +161,9 @@ https://developer.adobe.com/commerce/extensibility/starter-kit/integration/creat
 - For PaaS, this process requires a Commerce instance with [**Adobe Identity Management Service (IMS) for Adobe Commerce**](https://experienceleague.adobe.com/en/docs/commerce-admin/start/admin/ims/adobe-ims-integration-overview) configured.
 - For SaaS, IMS configuration is included by default.
 
+### Admin UI SDK
+ - For PaaS, the Admin UI SDK is required. Please follow the [**installation instructions**](https://developer.adobe.com/commerce/extensibility/admin-ui-sdk/installation/) and [**configuration instructions**](https://developer.adobe.com/commerce/extensibility/admin-ui-sdk/configuration/)
+
 ---
 
 ## 6. Obtain Credentials
