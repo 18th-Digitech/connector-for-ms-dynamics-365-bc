@@ -148,7 +148,7 @@ https://developer.adobe.com/commerce/extensibility/starter-kit/integration/creat
 ### Base URL Differences
 
 - PaaS: https://<environment-name>.magentosite.cloud/rest/
-- SaaS: https://na1-sandbox.api.commerce.adobe.com/<tenant-id>/
+- SaaS: https://na1-sandbox.api.commerce.adobe.com/[tenant-id]/
 
 ### Authentication Precedence
 
