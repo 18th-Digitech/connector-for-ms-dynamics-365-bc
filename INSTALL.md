@@ -24,6 +24,7 @@ This document provides step-by-step instructions to install, configure, and depl
 - Business Central Oauth Client
 - Business Central Oauth Secret
 - Business Central Oauth Grant Type
+- Business Central Oauth Scope
 
 
 ## 2.Quick Start Installation
