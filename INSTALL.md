@@ -34,17 +34,8 @@ This document provides step-by-step instructions to install, configure, and depl
 
 ---
 
-## 3. Install the App from Adobe Exchange
 
-1. Acquire the **Connector for MS Dynamics 365 BC**  App from Adobe Exchange
-2. Obtain organization admin approval
-3. Select environment (Development / Staging / Production)
-4. Create workspace using the guide:
-   https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/
-
----
-
-## 4. Configure Required Services
+## 3. Configure Required Services
 
 Create an App Builder Project in Developer Console along with required services.
 
@@ -62,9 +53,9 @@ Create an App Builder Project in Developer Console along with required services.
    d. Adobe Commerce as a Cloud Service (For SaaS installation)
   ```
 
-## 5. Environment Configuration
+## 4. Environment Configuration
 
-### 5.1 Create .env File
+### 4.1 Create .env File
 
 ```bash
 cp .env.dist .env
@@ -74,7 +65,7 @@ Run this command in the project root directory.
 
 ---
 
-### 5.2 Adobe Commerce Configuration
+### 4.2 Adobe Commerce Configuration
 
 ```env
 COMMERCE_BASE_URL=https://<your-commerce-url>/rest/
@@ -86,7 +77,7 @@ COMMERCE_ACCESS_TOKEN_SECRET=
 
 ---
 
-### 5.3 Business Central Configuration
+### 4.3 Business Central Configuration
 
 ```env
 BC_ENVIRONMENT=
@@ -101,7 +92,7 @@ BC_OAUTH_GRANT_TYPE=
 
 ---
 
-### 5.4 Custom Environment Variable 
+### 4.4 Custom Environment Variable 
 
 #### Inventory sources
 - AVAILABLE_SOURCES_DIR=sources_data/
@@ -120,7 +111,7 @@ BC_OAUTH_GRANT_TYPE=
 - TAX_CLASS_ID=2
 - WEBSITE_IDS=1
 
-### 5.5 Adobe App Builder (IMS OAuth – SaaS)
+### 4.5 Adobe App Builder (IMS OAuth – SaaS)
 
 ```env
 OAUTH_CLIENT_ID=
@@ -134,7 +125,7 @@ OAUTH_HOST=https://ims-na1.adobelogin.com
 
 ---
 
-### 5.6 Workspace Identifiers
+### 4.6 Workspace Identifiers
 
 Copy from Developer Console → Project → Workspace:
 
@@ -146,13 +137,13 @@ IO_WORKSPACE_ID=
 
 ---
 
-### 5.7 Add workspace.json file
+### 4.7 Add workspace.json file
 
 The workspace.json file must be placed in  scripts/onboarding/config/
 https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/#download-the-workspace-configuration-file
 
 
-## 6. Authentication: PaaS vs SaaS
+## 5. Authentication: PaaS vs SaaS
 
 ### Base URL Differences
 
@@ -166,7 +157,7 @@ https://developer.adobe.com/commerce/extensibility/starter-kit/integration/creat
 
 ---
 
-## 7. Obtain Credentials
+## 6. Obtain Credentials
 
 ### Adobe Commerce (PaaS)
 - System → Extensions → Integrations → Add New Integration
@@ -181,7 +172,7 @@ https://developer.adobe.com/commerce/extensibility/starter-kit/integration/creat
 
 ---
 
-## 8. Initialize 
+## 7. Initialize 
 
 ```bash
 npm install
@@ -192,7 +183,7 @@ aio console workspace select
 aio app use --merge
 ```
 
-## 9. Onboarding & Deploy
+## 8. Onboarding & Deploy
 
 The onboarding script must be executed manually before running aio app deploy. If this step is skipped, the post-deploy script may fail.
 
@@ -200,7 +191,7 @@ The onboarding script must be executed manually before running aio app deploy. I
 npm run onboard
 
 ```
-### 9.1 Deploy
+### 8.1 Deploy
 
 ```bash
 aio app deploy
@@ -208,7 +199,7 @@ aio app deploy
 ```
 
 
-## 10. Event Subscription
+## 9. Event Subscription
 
 ### Event Used
 - observer.customer_save_commit_after
@@ -223,7 +214,7 @@ Event subscriptions are automatically created during deployment.
 
 ---
 
-## 11. Testing
+## 10. Testing
 
 - Run Full Product Sync → Entire catalog updates in Adobe Commerce
 - Execute Delta Sync → Recently modified products are updated
@@ -233,7 +224,7 @@ Event subscriptions are automatically created during deployment.
 
 ---
 
-## 12. Debugging & Monitoring
+## 11. Debugging & Monitoring
 
 Developer Console → Events → Commerce Customer Sync → Debug Tracing
 
@@ -242,7 +233,7 @@ https://developer.adobe.com/commerce/extensibility/app-development/best-practice
 
 ---
 
-## 13. Troubleshooting
+## 12. Troubleshooting
 
 - Customer sync issues: If customer data is not syncing, go to Developer Console → Events → Commerce Customer Sync → Debug Tracing to review event logs and identify errors.
 - Product or Inventory Source sync errors: Navigate to your project directory and run aio rt:activation:list to view recent activations. Identify the relevant activation ID for the failed sync, then run aio rt:activation:log <activationId> to retrieve detailed error logs.
@@ -250,7 +241,7 @@ https://developer.adobe.com/commerce/extensibility/app-development/best-practice
 
 ---
 
-## 14. References
+## 13. References
 
 - https://developer.adobe.com/app-builder/docs/
 - https://developer.adobe.com/commerce/extensibility/starter-kit/integration/
