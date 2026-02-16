@@ -40,6 +40,14 @@ Please follow the detailed installation instructions in:
 
 ------------------------------------------------------------------------
 
+## ⚠️ Important -- Product Attribute Configuration
+
+     
+PRODUCT_ATTRIBUTE_CODE = <attribute_code>$<attribute_name>$<attribute_type>,
+
+Each entry consists of three components: the unique attribute code (which serves as the system identifier), the display name as shown in the Admin interface, and the attribute type. The attribute types can include text (for text input), decimal (for numeric values with decimals), boolean (for yes or no options), option (for a single-select dropdown), or multiselect (for multiple selectable options). For example, the format would be: PRODUCT_ATTRIBUTE_CODE=uom$UOM$option
+
+
 ## ⚠️ Important -- Onboarding Required Before Deployment
 
 Before deploying the app, you must manually run:
