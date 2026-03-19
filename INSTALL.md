@@ -143,6 +143,11 @@ IO_WORKSPACE_ID=
 The workspace.json file must be placed in  scripts/onboarding/config/
 https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/#download-the-workspace-configuration-file
 
+### 4.8 Add Secret Token 
+
+```env
+TOKEN_SECRET=
+```
 
 ## 5. Authentication: PaaS vs SaaS
 
