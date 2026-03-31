@@ -112,6 +112,9 @@ BC_OAUTH_GRANT_TYPE=
 - TAX_CLASS_ID=2
 - WEBSITE_IDS=1
 
+#### Commerce Event Module
+- COMMERCE_ADOBE_IO_EVENTS_ENVIRONMENT_ID=Stage
+
 ### 4.5 Adobe App Builder (IMS OAuth – SaaS)
 
 ```env
@@ -120,7 +123,7 @@ OAUTH_CLIENT_SECRET=
 OAUTH_TECHNICAL_ACCOUNT_ID=
 OAUTH_TECHNICAL_ACCOUNT_EMAIL=
 OAUTH_ORG_ID=
-OAUTH_SCOPES=['…']
+OAUTH_SCOPES=AdobeID, openid, read_organizations, additional_info.projectedProductContext, additional_info.roles, adobeio_api, read_client_secret, manage_client_secrets, event_receiver_api, commerce.accs
 OAUTH_HOST=https://ims-na1.adobelogin.com
 ```
 
@@ -149,12 +152,13 @@ https://developer.adobe.com/commerce/extensibility/starter-kit/integration/creat
 TOKEN_SECRET=
 ```
 
+
 ## 5. Authentication: PaaS vs SaaS
 
 ### Base URL Differences
 
 - PaaS: https://<environment-name>.magentosite.cloud/rest/
-- SaaS: https://na1-sandbox.api.commerce.adobe.com/[tenant-id]/
+- SaaS: https://na1.api.commerce.adobe.com/[tenant-id]/
 
 ### Authentication Precedence
 
@@ -197,20 +201,16 @@ aio console workspace select
 aio app use --merge
 ```
 
+`aio app use --merge` may populate some values as JSON arrays. The app now accepts that format for `OAUTH_SCOPES`.
+
 ## 8. Onboarding & Deploy
-
-The onboarding script must be executed manually before running aio app deploy. If this step is skipped, the post-deploy script may fail.
-
-```bash
-npm run onboard
-
-```
-### 8.1 Deploy
 
 ```bash
 aio app deploy
 
 ```
+
+The post-deploy hook runs onboarding and event subscription automatically after deployment.
 
 
 ## 9. Event Subscription
@@ -224,7 +224,7 @@ aio app deploy
 npm run commerce-event-subscribe
 ```
 
-Event subscriptions are automatically created during deployment.
+Use this only if you need to re-run subscriptions manually.
 
 ---
 
@@ -261,4 +261,3 @@ https://developer.adobe.com/commerce/extensibility/app-development/best-practice
 - https://developer.adobe.com/commerce/extensibility/starter-kit/integration/
 - https://developer.adobe.com/events/docs/support/tracing
 - https://experienceleague.adobe.com/en/docs/commerce-admin/start/admin/ims/adobe-ims-config#
-
