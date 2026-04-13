@@ -10,6 +10,7 @@ This document provides step-by-step instructions to install, configure, and depl
 ### System Requirements
 - Node.js v18+
 - Adobe I/O CLI v10+ (installed and authenticated)
+- Adobe Admin UI SDK 3.0.0 or later
 
 ### Access Requirements
 - Adobe App Builder
@@ -54,9 +55,34 @@ Create an App Builder Project in Developer Console along with required services.
    d. Adobe Commerce as a Cloud Service (For SaaS installation)
   ```
 
-## 4. Environment Configuration
+## 4. Adobe I/O Events Setup
 
-### 4.1 Create .env File
+Follow the Adobe Commerce eventing guides while configuring the project:
+
+- [Installation guide for Adobe I/O Events](https://developer.adobe.com/commerce/extensibility/events/installation/)
+- [Configure Commerce for Adobe I/O Events](https://developer.adobe.com/commerce/extensibility/events/configure-commerce/)
+- [Create custom events](https://developer.adobe.com/commerce/extensibility/events/create-events/)
+
+### 4.1 PaaS Flow
+
+1. Make sure your Adobe Commerce instance has the Adobe I/O Events module installed and enabled.
+2. Create or update the Commerce integration in Admin and confirm the OAuth credentials are available.
+3. Download the Workspace configuration file from Adobe Developer Console and place it at `scripts/onboarding/config/workspace.json`.
+4. Confirm the workspace contains the provider and registration data required by this connector.
+5. Run `aio app use --merge` so the App Builder workspace values are merged into your environment.
+
+
+### 4.2 SaaS Flow
+
+1. Create an App Builder project and add the required APIs listed above.
+2. Copy the OAuth server-to-server credentials from the workspace into your environment variables.
+3. Download the Workspace configuration file and place it at `scripts/onboarding/config/workspace.json`.
+4. Run `aio app use --merge` and confirm the `OAUTH_*` values are populated correctly.
+5. If automated setup fails, use the Adobe documentation links above to complete the Commerce eventing configuration manually.
+
+## 5. Environment Configuration
+
+### 5.1 Create .env File
 
 ```bash
 cp .env.dist .env
@@ -66,7 +92,7 @@ Run this command in the project root directory.
 
 ---
 
-### 4.2 Adobe Commerce Configuration
+### 5.2 Adobe Commerce Configuration
 
 ```env
 COMMERCE_BASE_URL=https://<your-commerce-url>/rest/
@@ -78,7 +104,7 @@ COMMERCE_ACCESS_TOKEN_SECRET=
 
 ---
 
-### 4.3 Business Central Configuration
+### 5.3 Business Central Configuration
 
 ```env
 BC_ENVIRONMENT=
@@ -93,7 +119,7 @@ BC_OAUTH_GRANT_TYPE=
 
 ---
 
-### 4.4 Custom Environment Variable 
+### 5.4 Custom Environment Variable 
 
 #### Inventory sources
 - AVAILABLE_SOURCES_DIR=sources_data/
@@ -115,7 +141,7 @@ BC_OAUTH_GRANT_TYPE=
 #### Commerce Event Module
 - COMMERCE_ADOBE_IO_EVENTS_ENVIRONMENT_ID=Stage
 
-### 4.5 Adobe App Builder (IMS OAuth – SaaS)
+### 5.5 Adobe App Builder (IMS OAuth – SaaS)
 
 ```env
 OAUTH_CLIENT_ID=
@@ -129,7 +155,7 @@ OAUTH_HOST=https://ims-na1.adobelogin.com
 
 ---
 
-### 4.6 Workspace Identifiers
+### 5.6 Workspace Identifiers
 
 Copy from Developer Console → Project → Workspace:
 
@@ -141,19 +167,19 @@ IO_WORKSPACE_ID=
 
 ---
 
-### 4.7 Add workspace.json file
+### 5.7 Add workspace.json file
 
 The workspace.json file must be placed in  scripts/onboarding/config/
 https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration/#download-the-workspace-configuration-file
 
-### 4.8 Add Secret Token 
+### 5.8 Add Secret Token 
 
 ```env
 TOKEN_SECRET=
 ```
 
 
-## 5. Authentication: PaaS vs SaaS
+## 6. Authentication: PaaS vs SaaS
 
 ### Base URL Differences
 
@@ -175,7 +201,7 @@ TOKEN_SECRET=
 
 ---
 
-## 6. Obtain Credentials
+## 7. Obtain Credentials
 
 ### Adobe Commerce (PaaS)
 - System → Extensions → Integrations → Add New Integration
@@ -190,7 +216,7 @@ TOKEN_SECRET=
 
 ---
 
-## 7. Initialize 
+## 8. Initialize 
 
 ```bash
 npm install
@@ -203,7 +229,7 @@ aio app use --merge
 
 `aio app use --merge` may populate some values as JSON arrays. The app now accepts that format for `OAUTH_SCOPES`.
 
-## 8. Onboarding & Deploy
+## 9. Onboarding & Deploy
 
 ```bash
 aio app deploy
@@ -213,7 +239,7 @@ aio app deploy
 The post-deploy hook runs onboarding and event subscription automatically after deployment.
 
 
-## 9. Event Subscription
+## 10. Event Subscription
 
 ### Event Used
 - observer.customer_save_commit_after
@@ -228,7 +254,7 @@ Use this only if you need to re-run subscriptions manually.
 
 ---
 
-## 10. Testing
+## 11. Testing
 
 - Run Full Product Sync → Entire catalog updates in Adobe Commerce
 - Execute Delta Sync → Recently modified products are updated

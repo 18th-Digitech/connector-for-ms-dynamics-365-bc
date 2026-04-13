@@ -38,6 +38,13 @@ Please follow the detailed installation instructions in:
 
 👉 [**INSTALL.md**](https://github.com/18th-Digitech/connector-for-ms-dynamics-365-bc/blob/master/INSTALL.md)
 
+## ✅ Prerequisites
+
+- Node.js v18 or later
+- Adobe App Builder
+- Adobe I/O CLI v10 or later
+- Adobe Admin UI SDK 3.0.0 or later
+
 ------------------------------------------------------------------------
 
 ## ⚠️ Important -- Product Attribute Configuration
@@ -107,4 +114,3 @@ aio rt:activation:log <activationId>
 
 For advanced features or enterprise capabilities, contact:
 18th Digitech Pvt Ltd Team: **support@18dapps.com**
-
